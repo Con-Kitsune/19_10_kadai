@@ -1,0 +1,34 @@
+.login_wrapper{
+    display:flex;
+    color: #fff;
+
+}
+.main_wrapper{
+    display:flex;
+}
+.header_bunner{
+    height:30%;
+    margin:auto;
+    display:flex;
+}
+.header{
+    color: #fff;
+    height:4%;
+    width:100%;
+    background-color: #000;
+}
+.navi{
+    width:20%;
+    height:64%;
+    background-color: yellow;
+}
+.article{
+    width:60%;
+    height:64%;
+    background-color: green;
+}
+.aside{
+    width:20%;
+    height:64%;
+    background-color: greenyellow;
+}

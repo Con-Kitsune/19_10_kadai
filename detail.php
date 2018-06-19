@@ -2,32 +2,6 @@
 session_start();
 include("functions.php");
 
-//1.  DB接続します
-$pdo = db_con();
-
-//２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_product_table");
-$status = $stmt->execute();
-
-//３．データ表示
-$view="";
-if($status==false){
-  queryError($stmt);
-}else{
-  //Selectデータの数だけ自動でループしてくれる
-  while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= '<p>';
-    $view .= '<img src="upload/'.$result["image"].'" width="200">';
-    $view .= '<a href="detail.php?id='.$result["id"].'">';
-    $view .= h($result["name"]);
-    $view .= '</a>';
-    $view .= '<a href="delete.php?id='.$result["id"].'">';
-    $view .= '[削除]';
-    $view .= '</a>';
-    $view .= '</p>';
-  }
-}
-
 ?>
 
 
@@ -45,7 +19,6 @@ if($status==false){
         <div class="login_wrapper">
             <a href="" class="header">Log in</a>
             <a href="" class="header">Cart</a>
-            <a href="insert.php" class="header">登録</a>
         </div>
         <div class="header_bunner">
                 <a href=""><img src="image/header.jpg" alt=""></a>
@@ -62,7 +35,6 @@ if($status==false){
             </ul>
         </nav>
         <article class="article">
-            <div><?=$view?></div>
         
         </article>
         <aside class="aside">
