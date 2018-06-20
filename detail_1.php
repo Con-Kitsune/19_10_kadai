@@ -6,7 +6,7 @@ include("functions.php");
 $pdo = db_con();
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_product_table");
+$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE category ='メガネ'");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -72,12 +72,11 @@ if($status==false){
             <a href=""><img src="image/ad300250.jpg" alt=""></a>
         </aside>
     </main>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script>
+    <script>
   $("#sbtn").on("click",function(){
     $.ajax({
       type: "POST",
-      url: "ajax_search.php",
+      url: "ajax_search_1.php",
       datatype: "html",
       data:{
         search:$("#search").val()

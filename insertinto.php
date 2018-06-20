@@ -1,9 +1,11 @@
 <?php
+session_start();
 include("functions.php");
 //入力チェック(受信確認処理追加)
 if(
   !isset($_POST["name"]) || $_POST["name"]=="" ||
-  !isset($_POST["discript"]) || $_POST["discript"]==""
+  !isset($_POST["discript"]) || $_POST["discript"]=="" ||
+  !isset($_POST["category"]) || $_POST["category"]==""
 ){
   exit('ParamError');
 }
@@ -11,6 +13,7 @@ if(
 //1. POSTデータ取得
 $name   = $_POST["name"];
 $discript  = $_POST["discript"];
+$category = $_POST["category"];
 
 //Fileアップロードチェック
 if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
@@ -18,7 +21,6 @@ if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
   $file_name = $_FILES["upfile"]["name"];         //"1.jpg"ファイル名取得
   $tmp_path  = $_FILES["upfile"]["tmp_name"]; //"/usr/www/tmp/1.jpg"アップロード先のTempフォルダ
   $file_dir_path = "upload/";  //画像ファイル保管先
-
   
   //***File名の変更***
   $extension = pathinfo($file_name, PATHINFO_EXTENSION); //拡張子取得(jpg, png, gif)
@@ -41,14 +43,17 @@ if (isset($_FILES["upfile"] ) && $_FILES["upfile"]["error"] ==0 ) {
   echo "画像が送信されていません"; //Error文字
 }
 
+
+
 //2. DB接続します(エラー処理追加)
 $pdo = db_con();
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO gs_product_table(id, name, discript, image )VALUES(NULL, :a1, :a2, :image)");
+$stmt = $pdo->prepare("INSERT INTO gs_product_table(id, name, discript, image , category)VALUES(NULL, :a1, :a2, :image, :a3)");
 $stmt->bindValue(':a1', $name,   PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':a2', $discript,  PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $stmt->bindValue(':image', $uniq_name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue(':a3', $category,  PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $status = $stmt->execute();
 
 //４．データ登録処理後

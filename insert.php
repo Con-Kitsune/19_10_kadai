@@ -11,9 +11,10 @@
   <div class="insert">
    <fieldset>
     <legend>商品登録</legend>
+     <label>カテゴリ名：<input type="text" name="category"></label><br>
      <label>商品名：<input type="text" name="name"></label><br>
      <label>詳細：<textArea name="discript" rows="4" cols="40"></textArea></label><br>
-     <input type="file" name="upfile"><br>
+     <input type="file" name="upfile" accept="image/*" capture="camera"><br>
      <input type="submit" value="送信">
     </fieldset>
   </div>
