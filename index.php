@@ -39,6 +39,9 @@ if($status==false){
     <link rel="stylesheet" href="main.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <title>通販</title>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
 </head>
 <body>
     <header>
@@ -47,10 +50,12 @@ if($status==false){
             <a href="" class="header">Cart</a>
             <a href="insert.php" class="header">登録</a>
         </div>
-        <div class="header_bunner">
-                <a href="index.php"><img src="image/header.jpg" alt=""></a>
-
-        </div>
+        <ul class="slider" id="single-item">
+            <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header.jpg"></a></li>
+        </ul>
     </header>
     <main class="main_wrapper">
         <nav class="navi">
@@ -73,7 +78,11 @@ if($status==false){
         </aside>
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
 <script>
+
   $("#sbtn").on("click",function(){
     $.ajax({
       type: "POST",
@@ -87,6 +96,13 @@ if($status==false){
       }
     });    
   });
+  $('.slider').slick({
+  dots: true,
+  infinite: true,
+  speed: 500,
+  fade: true,
+  cssEase: 'linear'
+    });
 </script>
 </body>
 </html>

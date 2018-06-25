@@ -6,11 +6,16 @@
 .main_wrapper{
     display:flex;
 }
-.header_bunner{
+.slider{
     height:30%;
     margin:auto;
     display:flex;
+    text-align: center;
 }
+.header-img{
+    margin:auto;
+}
+
 .header{
     color: #fff;
     height:4%;
