@@ -1,7 +1,9 @@
 <?php
 session_start();
 include("functions.php");
-
+if(!isset($_SESSION["name"])){
+    $_SESSION["name"] = "ゲスト";
+    }
 //1.  DB接続します
 $pdo = db_con();
 
@@ -46,6 +48,7 @@ if($status==false){
 <body>
     <header>
         <div class="login_wrapper">
+            <p class="header">ようこそ <?=$_SESSION["name"] ?>さん</p>
             <a href="" class="header">Log in</a>
             <a href="" class="header">Cart</a>
             <a href="insert.php" class="header">登録</a>

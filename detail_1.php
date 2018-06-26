@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("functions.php");
-
+chk_ssid();
 //1.  DB接続します
 $pdo = db_con();
 
