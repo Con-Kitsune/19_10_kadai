@@ -1,15 +1,18 @@
 <?php
 session_start();
 include("functions.php");
-if($_SESSION["chk_ssid"] != ""){
-    $_SESSION["chk_ssid"]  = session_id();
+// if($_SESSION["chk_ssid"] == ""){
+// $_SESSION["chk_ssid"]  = session_id();
+// }
+chk_ssid();
+if(!isset($_SESSION["name"])){
+    $_SESSION["name"] = "ゲスト";
     }
-    chk_ssid();
 //1.  DB接続します
 $pdo = db_con();
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE category ='メガネ'");
+$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE category='めがね'");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -42,18 +45,28 @@ if($status==false){
     <link rel="stylesheet" href="main.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <title>通販</title>
+    <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
 </head>
 <body>
     <header>
         <div class="login_wrapper">
-            <a href="" class="header">Log in</a>
+            <a class="header">ようこそ <?=$_SESSION["name"] ?>さん</a>
+            <?php if($_SESSION["name"] == "ゲスト"){
+                echo '<a href="login.php" class="header">Log in</a>';
+                }else{
+                echo '<a href="logout.php" class="header">Log out</a>';
+                }?>
             <a href="" class="header">Cart</a>
             <a href="insert.php" class="header">登録</a>
         </div>
-        <div class="header_bunner">
-                <a href="index.php"><img src="image/header.jpg" alt=""></a>
-
-        </div>
+        <ul class="slider" id="single-item">
+            <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>
+            <li><a href="index.php"><img  class="header-img"src="image/header.jpg"></a></li>
+        </ul>
     </header>
     <main class="main_wrapper">
         <nav class="navi">
@@ -75,11 +88,16 @@ if($status==false){
             <a href=""><img src="image/ad300250.jpg" alt=""></a>
         </aside>
     </main>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick/slick.min.js"></script>
+<script>
+
   $("#sbtn").on("click",function(){
     $.ajax({
       type: "POST",
-      url: "ajax_search_1.php",
+      url: "ajax_search.php",
       datatype: "html",
       data:{
         search:$("#search").val()
@@ -89,6 +107,13 @@ if($status==false){
       }
     });    
   });
+  $('.slider').slick({
+  dots: true,
+  infinite: true,
+  speed: 500,
+  fade: true,
+  cssEase: 'linear'
+    });
 </script>
 </body>
 </html>

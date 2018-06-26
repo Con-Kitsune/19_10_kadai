@@ -1,6 +1,10 @@
 <?php
 session_start();
 include("functions.php");
+// if($_SESSION["chk_ssid"] == ""){
+// $_SESSION["chk_ssid"]  = session_id();
+// }
+chk_ssid();
 if(!isset($_SESSION["name"])){
     $_SESSION["name"] = "ゲスト";
     }
@@ -48,8 +52,12 @@ if($status==false){
 <body>
     <header>
         <div class="login_wrapper">
-            <p class="header">ようこそ <?=$_SESSION["name"] ?>さん</p>
-            <a href="" class="header">Log in</a>
+            <a class="header">ようこそ <?=$_SESSION["name"] ?>さん</a>
+            <?php if($_SESSION["name"] == "ゲスト"){
+                echo '<a href="login.php" class="header">Log in</a>';
+                }else{
+                echo '<a href="logout.php" class="header">Log out</a>';
+                }?>
             <a href="" class="header">Cart</a>
             <a href="insert.php" class="header">登録</a>
         </div>
@@ -64,7 +72,7 @@ if($status==false){
         <nav class="navi">
             <h2>Category</h2>
             <ul>
-                <Li><a href="detail_1.php">メガネ</a></Li>
+                <Li><a href="index2.php">メガネ</a></Li>
                 <Li><a href="detail_2.php">カテゴリ２</a></Li>
                 <Li><a href="detail_3.php">カテゴリ３</a></Li>
             </ul>
