@@ -37,12 +37,12 @@ if($status==false){
 ?>
 
 
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet"  type="text/css" href="main.css"/>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <title>通販</title>
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
@@ -59,7 +59,12 @@ if($status==false){
                 echo '<a href="logout.php" class="header">Log out</a>';
                 }?>
             <a href="" class="header">Cart</a>
-            <a href="insert.php" class="header">登録</a>
+            <?php if(isset($_SESSION["kanri_flg"]) && $_SESSION["kanri_flg"]==0){
+                echo '<a href="insert.php" class="header">登録</a>';
+            }else{
+                echo '<a class="header"></a>';
+            }
+            ?>
         </div>
         <ul class="slider" id="single-item">
             <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>

@@ -1,18 +1,16 @@
 <?php
 session_start();
 include("functions.php");
-// if($_SESSION["chk_ssid"] != ""){
-    // $_SESSION["chk_ssid"]  = session_id();
-    // }
-    chk_ssid();
-    if(!isset($_SESSION["name"])){
-        $_SESSION["name"] = "ゲスト";
-        }
+chk_ssid();
+if(!isset($_SESSION["name"])){
+    $_SESSION["name"] = "ゲスト";
+    }
 //1.  DB接続します
 $pdo = db_con();
+$id = $_GET["id"];
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE category ='メガネ'");
+$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE id =$id");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -23,13 +21,13 @@ if($status==false){
   //Selectデータの数だけ自動でループしてくれる
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<p>';
-    $view .= '<img src="upload/'.$result["image"].'" width="200">';
-    $view .= '<a href="detail.php?id='.$result["id"].'">';
     $view .= h($result["name"]);
-    $view .= '</a>';
-    $view .= '<a href="delete.php?id='.$result["id"].'">';
-    $view .= '[削除]';
-    $view .= '</a>';
+    $view .= '</p>';
+    $view .= '<p>';
+    $view .= '<img src="upload/'.$result["image"].'" width="300">';
+    $view .= '</p>';
+    $view .= '<p>';
+    $view .= h($result["discript"]);
     $view .= '</p>';
   }
 }
@@ -37,7 +35,7 @@ if($status==false){
 ?>
 
 
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,11 +47,7 @@ if($status==false){
 <body>
     <header>
         <div class="login_wrapper">
-            <?php if($_SESSION["name"] != ""){
-                echo '<a href="" class="header">Log in</a>';
-                }else{
-                echo '<a href="" class="header">Log out</a>';
-                }?>
+            <a href="" class="header">Log in</a>
             <a href="" class="header">Cart</a>
             <a href="insert.php" class="header">登録</a>
         </div>

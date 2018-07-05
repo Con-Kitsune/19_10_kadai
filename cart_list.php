@@ -12,7 +12,9 @@ include("functions.php");
 $pdo = db_con();
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE category ='メガネ'");
+// $stmt = $pdo->prepare("SELECT * FROM gs_product_table WHERE id ='$_SESSION["cart"]'");
+// session["cart"]に入っているidを指定しようと思ったんですが、エラーになってしまう。
+
 $status = $stmt->execute();
 
 //３．データ表示

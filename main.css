@@ -1,7 +1,9 @@
+@charset 'UTF-8';
 .login_wrapper{
     display:flex;
     color: #fff;
-
+    background-color: #000;
+    justify-content: flex-end;
 }
 .main_wrapper{
     display:flex;
@@ -19,9 +21,11 @@
 .header{
     color: #fff;
     height:4%;
-    width:100%;
-    background-color: #000;
+    /* width:100%; */
+    border:solid 1px #fff;
     margin:0px;
+   
+    
 }
 .navi{
     width:20%;
@@ -30,7 +34,7 @@
 }
 .article{
     width:60%;
-    height:64%;
+    height:auto;
     background-color: green;
 }
 .aside{

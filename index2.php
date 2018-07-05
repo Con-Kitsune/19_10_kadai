@@ -37,7 +37,7 @@ if($status==false){
 ?>
 
 
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +51,7 @@ if($status==false){
 </head>
 <body>
     <header>
-        <div class="login_wrapper">
+    <div class="login_wrapper">
             <a class="header">ようこそ <?=$_SESSION["name"] ?>さん</a>
             <?php if($_SESSION["name"] == "ゲスト"){
                 echo '<a href="login.php" class="header">Log in</a>';
@@ -59,7 +59,12 @@ if($status==false){
                 echo '<a href="logout.php" class="header">Log out</a>';
                 }?>
             <a href="" class="header">Cart</a>
-            <a href="insert.php" class="header">登録</a>
+            <?php if(isset($_SESSION["kanri_flg"]) && $_SESSION["kanri_flg"]==0){
+                echo '<a href="insert.php" class="header">登録</a>';
+            }else{
+                echo '<a class="header"></a>';
+            }
+            ?>
         </div>
         <ul class="slider" id="single-item">
             <li><a href="index.php"><img  class="header-img"src="image/header2.jpg"></a></li>
